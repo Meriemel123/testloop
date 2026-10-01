@@ -4,7 +4,25 @@ import { LogoMark } from "@/components/ui/LogoMark";
 export function Footer() {
   return (
     <footer className="mt-auto border-t border-lines">
-      <div className="mx-auto flex max-w-[1440px] flex-col gap-10 px-5 py-12 sm:px-8 lg:flex-row lg:justify-between lg:gap-16 lg:px-[120px] lg:py-14">
+      {/* Mobile */}
+      <div className="mx-auto flex max-w-[1440px] flex-col gap-6 px-5 py-9 sm:hidden">
+        <div className="flex items-center gap-2.5">
+          <LogoMark size={28} iconSize={16} />
+          <span className="text-[16px] font-semibold text-ink">{nav.logo}</span>
+        </div>
+        <span className="text-[14px] leading-[1.6] text-[#6E675C]">{footer.tagline}</span>
+        <div className="flex flex-wrap gap-x-5 gap-y-2.5 text-[14px]">
+          {footer.linksMobile.map((link) => (
+            <a key={link.label} href={link.href} className="text-[#6E675C]">
+              {link.label}
+            </a>
+          ))}
+        </div>
+        <span className="text-[13px] text-[#7A7266]">{footer.copyright}</span>
+      </div>
+
+      {/* Tablet/desktop */}
+      <div className="mx-auto hidden max-w-[1440px] px-8 py-12 sm:flex sm:flex-col sm:gap-10 lg:flex-row lg:justify-between lg:gap-16 lg:px-[120px] lg:py-14">
         <div className="flex max-w-[320px] flex-col gap-3">
           <div className="flex items-center gap-2.5">
             <LogoMark size={26} iconSize={15} />

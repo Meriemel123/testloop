@@ -17,12 +17,19 @@ export function ProductTour() {
   }, [activeTab]);
 
   return (
-    <section className="mx-auto flex max-w-[1440px] flex-col items-center gap-9 px-5 pt-4 pb-16 sm:px-8 lg:px-[120px] lg:pt-4 lg:pb-[140px]">
-      <div className="flex flex-col items-center gap-4">
+    <section className="mx-auto flex w-full max-w-[1440px] min-w-0 flex-col items-center gap-9 px-5 pt-4 pb-16 sm:px-8 lg:px-[120px] lg:pt-4 lg:pb-[140px]">
+      <div className="flex w-full min-w-0 flex-col items-center gap-4">
         <div className="flex items-end justify-center">
-          <Annotation size={26} arrow="underline-right">
-            {demoIntro.annotation}
-          </Annotation>
+          <span className="sm:hidden">
+            <Annotation size={24} arrow="underline-right">
+              {demoIntro.annotationMobile}
+            </Annotation>
+          </span>
+          <span className="hidden sm:inline">
+            <Annotation size={26} arrow="underline-right">
+              {demoIntro.annotation}
+            </Annotation>
+          </span>
         </div>
 
         <SegmentedTabs
@@ -37,7 +44,19 @@ export function ProductTour() {
         </p>
       </div>
 
-      <div className="relative w-full max-w-[1200px]">
+      <div className="relative mx-3 w-[calc(100%-24px)] sm:mx-0 sm:w-full lg:max-w-[1200px]">
+        <div className="pointer-events-none absolute -top-3 right-2 z-20 flex max-w-[190px] items-center gap-2.5 rounded-2xl bg-ink px-3.5 py-2.5 text-[#F7F3EC] shadow-[0_16px_32px_-14px_rgba(51,47,40,0.6)] sm:hidden">
+          <span className="flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-full bg-sage">
+            <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M3 7.5l2.5 2.5L11 4.5" stroke="#FFFDF8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
+          <div className="flex flex-col">
+            <span className="text-[12px] font-semibold">{floatingElements.notification.title}</span>
+            <span className="text-[11px] text-[#B3A797]">{floatingElements.notification.subtitle}</span>
+          </div>
+        </div>
+
         <div className="pointer-events-none absolute top-16 left-2 z-20 hidden max-w-[220px] items-center gap-3 rounded-2xl bg-ink px-3.5 py-3.5 text-[#F7F3EC] shadow-[0_24px_48px_-20px_rgba(51,47,40,0.6)] lg:-left-16 lg:flex">
           <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sage">
             <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">

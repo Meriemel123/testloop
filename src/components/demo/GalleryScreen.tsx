@@ -17,18 +17,20 @@ export function GalleryScreen() {
   }
 
   return (
-    <div className="flex flex-col gap-3.5 p-5 sm:p-8">
+    <div className="flex flex-col gap-3 p-4 sm:gap-3.5 sm:p-8">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <span className="text-[13px] text-[#6E675C]">
-          <strong className="font-semibold text-ink">{galleryPhotos.length} finished pieces</strong> ·{" "}
-          {picked.size} picked for your launch post
+        <span className="text-[12px] text-[#6E675C] sm:text-[13px]">
+          <strong className="font-semibold text-ink">{galleryPhotos.length} finished pieces</strong>{" "}
+          · {picked.size} picked{" "}
+          <span className="lg:hidden">for launch</span>
+          <span className="hidden lg:inline">for your launch post</span>
         </span>
-        <span className="inline-flex h-[34px] items-center rounded-full bg-sage px-3.5 text-[13px] font-medium text-[#FFFDF8]">
+        <span className="hidden h-[34px] items-center rounded-full bg-sage px-3.5 text-[13px] font-medium text-[#FFFDF8] lg:inline-flex">
           Download for launch
         </span>
       </div>
 
-      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-5">
+      <div className="grid grid-cols-2 gap-2 sm:gap-2.5 sm:grid-cols-5">
         {galleryPhotos.map((photo) => {
           const selected = picked.has(photo.id);
           return (
@@ -37,9 +39,9 @@ export function GalleryScreen() {
               type="button"
               aria-pressed={selected}
               onClick={() => toggle(photo.id)}
-              className="flex flex-col gap-2 text-left"
+              className="flex flex-col gap-1.5 text-left sm:gap-2"
             >
-              <span className="relative block aspect-[150/220] overflow-hidden rounded-xl">
+              <span className="relative block aspect-[150/118] overflow-hidden rounded-xl sm:aspect-[150/220]">
                 <KnitTexture color={photo.color} />
                 {selected ? (
                   <span
@@ -57,14 +59,17 @@ export function GalleryScreen() {
                   />
                 )}
               </span>
-              <span className="text-[13px] font-semibold text-ink">{photo.name}</span>
-              <span className="-mt-1.5 text-[12px] text-[#7A7266]">{photo.meta}</span>
+              <span className="text-[12px] font-semibold text-ink sm:hidden">
+                {photo.name} <span className="font-normal text-[#7A7266]">· {photo.meta}</span>
+              </span>
+              <span className="hidden text-[13px] font-semibold text-ink sm:inline">{photo.name}</span>
+              <span className="hidden -mt-1.5 text-[12px] text-[#7A7266] sm:inline">{photo.meta}</span>
             </button>
           );
         })}
       </div>
 
-      <span className="text-[12px] text-[#7A7266]">
+      <span className="text-[11px] text-[#7A7266] sm:text-[12px]">
         Tap a piece to pick it for your launch post. Makers agree to photo use when they apply.
       </span>
     </div>

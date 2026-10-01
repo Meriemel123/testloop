@@ -7,7 +7,7 @@ import { signupForm } from "@/lib/content";
 
 type Answers = {
   testsPerYear: string;
-  currentTool: string;
+  currentTool: string[];
   wouldPay: string;
 };
 
@@ -18,7 +18,7 @@ export function SignupForm() {
   const [email, setEmail] = useState("");
   const [answers, setAnswers] = useState<Answers>({
     testsPerYear: "",
-    currentTool: "",
+    currentTool: [],
     wouldPay: "",
   });
   const [source] = useState(() => {
@@ -36,14 +36,25 @@ export function SignupForm() {
     }
   }
 
-  function selectAnswer(id: keyof Answers, value: string) {
+  function selectSingle(id: "testsPerYear" | "wouldPay", value: string) {
     trackStart();
     setAnswers((prev) => ({ ...prev, [id]: value }));
   }
 
+  function toggleMulti(id: "currentTool", value: string) {
+    trackStart();
+    setAnswers((prev) => {
+      const current = prev[id];
+      const next = current.includes(value)
+        ? current.filter((v) => v !== value)
+        : [...current, value];
+      return { ...prev, [id]: next };
+    });
+  }
+
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const canSubmit =
-    isValidEmail && answers.testsPerYear && answers.currentTool && answers.wouldPay;
+    isValidEmail && answers.testsPerYear && answers.currentTool.length > 0 && answers.wouldPay;
 
   function handleSubmit(formData: FormData) {
     if (!isValidEmail) {
@@ -59,7 +70,7 @@ export function SignupForm() {
 
   if (state.status === "success") {
     return (
-      <div className="relative flex flex-1 flex-col gap-4 rounded-[22px] bg-[#FBF8F2] p-9 text-ink sm:p-9 lg:w-[540px] lg:shrink-0 lg:grow-0">
+      <div className="flex flex-col gap-4">
         <span className="flex h-[46px] w-[46px] items-center justify-center rounded-full bg-[#DCE7D7]">
           <svg width="20" height="20" viewBox="0 0 14 14" fill="none" aria-hidden="true">
             <path d="M3 7.5l2.5 2.5L11 4.5" stroke="#2F5232" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -86,10 +97,7 @@ export function SignupForm() {
   }
 
   return (
-    <form
-      action={handleSubmit}
-      className="relative box-border flex flex-1 flex-col gap-6 rounded-[22px] bg-[#FBF8F2] p-8 text-ink sm:p-9 lg:w-[540px] lg:shrink-0 lg:grow-0"
-    >
+    <form action={handleSubmit} className="flex flex-col gap-5 sm:gap-6">
       <input type="hidden" name="source" value={source} />
 
       <div className="flex flex-col gap-2">
@@ -119,32 +127,42 @@ export function SignupForm() {
         )}
       </div>
 
-      {signupForm.questions.map((q) => (
-        <fieldset key={q.id} className="m-0 flex flex-col border-0 p-0">
-          <legend className="mb-2.5 p-0 text-[14px] font-medium text-ink">{q.legend}</legend>
-          <input type="hidden" name={q.id} value={answers[q.id]} />
-          <div className="flex flex-wrap gap-1.5">
-            {q.options.map((option) => {
-              const selected = answers[q.id] === option;
-              return (
-                <button
-                  key={option}
-                  type="button"
-                  aria-pressed={selected}
-                  onClick={() => selectAnswer(q.id, option)}
-                  className={`h-11 rounded-full px-4 text-[14px] font-medium ${
-                    selected
-                      ? "border border-sage bg-sage text-[#FFFDF8]"
-                      : "border border-[#DDD3C3] bg-[#F7F3EC] text-ink"
-                  }`}
-                >
-                  {option}
-                </button>
-              );
-            })}
-          </div>
-        </fieldset>
-      ))}
+      {signupForm.questions.map((q) => {
+        const isMulti = q.id === "currentTool";
+        const hiddenValue = isMulti ? answers.currentTool.join(", ") : answers[q.id as "testsPerYear" | "wouldPay"];
+        return (
+          <fieldset key={q.id} className="m-0 flex flex-col border-0 p-0">
+            <legend className="mb-2.5 p-0 text-[14px] font-medium text-ink">{q.legend}</legend>
+            <input type="hidden" name={q.id} value={hiddenValue} />
+            <div className="flex flex-wrap gap-1.5">
+              {q.options.map((option) => {
+                const selected = isMulti
+                  ? answers.currentTool.includes(option)
+                  : answers[q.id as "testsPerYear" | "wouldPay"] === option;
+                return (
+                  <button
+                    key={option}
+                    type="button"
+                    aria-pressed={selected}
+                    onClick={() =>
+                      isMulti
+                        ? toggleMulti("currentTool", option)
+                        : selectSingle(q.id as "testsPerYear" | "wouldPay", option)
+                    }
+                    className={`h-11 rounded-full px-4 text-[14px] font-medium ${
+                      selected
+                        ? "border border-sage bg-sage text-[#FFFDF8]"
+                        : "border border-[#DDD3C3] bg-[#F7F3EC] text-ink"
+                    }`}
+                  >
+                    {option}
+                  </button>
+                );
+              })}
+            </div>
+          </fieldset>
+        );
+      })}
 
       {state.status === "error" && (
         <p role="alert" className="text-[14px] text-[#8F5330]">

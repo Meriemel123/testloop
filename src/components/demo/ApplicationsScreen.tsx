@@ -9,6 +9,21 @@ import {
   spotsTotal,
 } from "@/lib/demo-data";
 
+function AcceptedPill({ onClick }: { onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="inline-flex h-9 items-center justify-center gap-1.5 rounded-full bg-[#DCE7D7] px-3.5 text-[13px] font-medium text-[#2F5232]"
+    >
+      <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M3 7.5l2.5 2.5L11 4.5" stroke="#2F5232" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      Accepted
+    </button>
+  );
+}
+
 export function ApplicationsScreen() {
   const [applicants, setApplicants] = useState(initialApplicants);
 
@@ -24,8 +39,18 @@ export function ApplicationsScreen() {
   }
 
   return (
-    <div className="flex flex-col gap-3.5 p-5 sm:p-8">
-      <div className="flex flex-wrap items-center justify-between gap-3">
+    <div className="flex flex-col gap-2.5 p-4 sm:gap-3.5 sm:p-8">
+      {/* Mobile summary row */}
+      <div className="flex items-center justify-between lg:hidden">
+        <span className="text-[13px] font-semibold text-ink">23 applications</span>
+        <span className="text-[12px] text-[#6E675C]">
+          <strong className="font-semibold text-ink">{acceptedCount} of {spotsTotal}</strong>{" "}
+          spots filled
+        </span>
+      </div>
+
+      {/* Desktop filter row */}
+      <div className="hidden flex-wrap items-center justify-between gap-3 lg:flex">
         <div className="flex flex-wrap gap-2">
           {applicationFilters.map((f, i) => (
             <span
@@ -46,11 +71,65 @@ export function ApplicationsScreen() {
         </p>
       </div>
 
-      <div className="flex flex-col overflow-hidden rounded-[14px] border border-lines">
+      {/* Mobile: stacked cards */}
+      <div className="flex flex-col gap-2.5 lg:hidden">
         {applicants.map((applicant) => (
           <div
             key={applicant.id}
-            className="flex flex-col gap-3 border-b border-[#EFE8DC] px-4 py-3.5 last:border-b-0 sm:flex-row sm:items-center sm:gap-4"
+            className="flex flex-col gap-2.5 rounded-[14px] border border-lines bg-[#FBF8F2] p-3"
+          >
+            <div className="flex items-center gap-2.5">
+              <span className="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-[#EFE8DC] text-[11px] font-semibold text-[#4F493F]">
+                {applicant.name
+                  .split(" ")
+                  .map((p) => p[0])
+                  .join("")}
+              </span>
+              <div className="min-w-0 flex-1">
+                <p className="text-[13px] font-semibold text-ink">
+                  {applicant.name}{" "}
+                  <span className="font-normal text-[#7A7266]">· {applicant.country}</span>
+                </p>
+                <p className="text-[11px] text-[#6E675C]">
+                  {applicant.level} · size {applicant.wantsSize}
+                </p>
+              </div>
+              <div className="flex gap-1">
+                {applicant.swatches.map((color, i) => (
+                  <span key={i} className="relative h-6 w-6 overflow-hidden rounded-[6px]">
+                    <KnitTexture color={color} />
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {applicant.accepted ? (
+              <AcceptedPill onClick={() => toggleAccept(applicant.id)} />
+            ) : (
+              <div className="flex gap-1.5">
+                <span className="flex flex-1 items-center justify-center rounded-full border border-[#DDD3C3] text-[13px] text-[#6E675C]" style={{ height: 36 }}>
+                  Decline
+                </span>
+                <button
+                  type="button"
+                  onClick={() => toggleAccept(applicant.id)}
+                  className="flex-1 rounded-full bg-sage text-[13px] font-medium text-[#FFFDF8]"
+                  style={{ height: 36 }}
+                >
+                  Accept
+                </button>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop: bordered list */}
+      <div className="hidden flex-col overflow-hidden rounded-[14px] border border-lines lg:flex">
+        {applicants.map((applicant) => (
+          <div
+            key={applicant.id}
+            className="flex items-center gap-4 border-b border-[#EFE8DC] px-4 py-3.5 last:border-b-0"
           >
             <span className="flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-full bg-[#EFE8DC] text-[12px] font-semibold text-[#4F493F]">
               {applicant.name
@@ -75,18 +154,9 @@ export function ApplicationsScreen() {
               ))}
             </div>
 
-            <div className="flex justify-end gap-1.5 sm:w-[176px]">
+            <div className="flex w-[176px] justify-end gap-1.5">
               {applicant.accepted ? (
-                <button
-                  type="button"
-                  onClick={() => toggleAccept(applicant.id)}
-                  className="inline-flex h-[34px] items-center gap-1.5 rounded-full bg-[#DCE7D7] px-3.5 text-[13px] font-medium text-[#2F5232]"
-                >
-                  <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                    <path d="M3 7.5l2.5 2.5L11 4.5" stroke="#2F5232" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  Accepted
-                </button>
+                <AcceptedPill onClick={() => toggleAccept(applicant.id)} />
               ) : (
                 <>
                   <span className="inline-flex h-[34px] items-center rounded-full border border-[#DDD3C3] px-3 text-[13px] text-[#6E675C]">
@@ -106,7 +176,7 @@ export function ApplicationsScreen() {
         ))}
       </div>
 
-      <span className="text-[12px] text-[#7A7266]">
+      <span className="text-[11px] text-[#7A7266] sm:text-[12px]">
         Accepted and declined makers are emailed automatically.
       </span>
     </div>

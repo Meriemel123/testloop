@@ -7,13 +7,17 @@ export const nav = {
     { label: "Questions", href: "#faq" },
   ],
   cta: "Join early access",
+  ctaMobile: "Join",
 };
 
 export const hero = {
   eyebrow: "For independent knit & crochet designers",
+  eyebrowMobile: "For knit & crochet designers",
   heading: "Pattern tests that",
   headingItalic: "finish on time.",
   lead: "Gather your testers with one link, watch every project grow, share corrections in a single click, and keep every note and finished photo together.",
+  leadMobile:
+    "Gather your testers with one link, watch every project grow, share corrections in a single click, and keep every finished photo together.",
   cta: "Save my spot",
   note: "Your first test is free. No card needed.",
   annotation: "your whole test, on one calm page",
@@ -21,6 +25,7 @@ export const hero = {
 
 export const demoIntro = {
   annotation: "go on, click around",
+  annotationMobile: "go on, tap around",
 };
 
 export const demoTabs = [
@@ -58,10 +63,13 @@ export const beforeAfter = {
   heading: "Your pattern deserves better than",
   headingItalic: "five tabs and a spreadsheet.",
   lead: "Everything you juggle during a test today is replaced by one calm page. You can finally close those tabs.",
+  leadMobile: "Everything you juggle during a test today is replaced by one calm page.",
   todayLabel: "Today",
   todaySub: "5 tools, 5 tabs",
+  todayMobile: "Today · 5 tools",
   withLabel: "With Testloop",
   withSub: "1 page, 1 link",
+  withMobile: "Testloop · 1 page",
   rows: [
     {
       before: "Google Forms",
@@ -151,6 +159,8 @@ export const gallery = {
   heading: "Every test ends with",
   headingItalic: "something beautiful.",
   lead: "Your makers' finished pieces gather in one gallery, ready for your launch post and your pattern page.",
+  leadMobile: "Your makers' finished pieces gather in one gallery, ready for your launch post.",
+  mobileHint: "swipe to see more →",
   tiles: [
     { color: "clay" as const, title: "Harbour Cardigan", caption: "Made by Léa · terracotta, size L" },
     { color: "sage" as const, title: "Harbour Cardigan", caption: "Made by Jo · sage, size S" },
@@ -163,6 +173,8 @@ export const community = {
   heading: "Your testers,",
   headingItalic: "your community.",
   lead: "No marketplace and no crowd of other designers. Share your link where your makers already follow you — and the testers you love stay yours, test after test.",
+  leadMobile:
+    "No marketplace and no crowd of other designers. Share your link where your makers already follow you — and the testers you love stay yours.",
   channelsTitle: "Share your link on",
   channels: ["Instagram", "Ravelry", "Facebook groups", "TikTok", "Your newsletter"],
   needsTitle: "Your makers need",
@@ -206,6 +218,7 @@ export const pricing = {
   headingItalic: "independent designers.",
   lead: "Try it on a real pattern first. Stay only if it gives you your evenings back.",
   annotation: "early birds keep this price for life",
+  annotationMobile: "↑ early birds keep this price for life",
   free: {
     title: "Your first test",
     subtitle: "See how it fits the way you work",
@@ -234,6 +247,7 @@ export const faq = {
   heading: "Good",
   headingItalic: "questions.",
   lead: "Something else on your mind? Write to me at [YOUR EMAIL]. I read every message.",
+  leadMobile: "Something else on your mind? Write to me at [YOUR EMAIL].",
   items: [
     {
       question: "Do my testers need an account?",
@@ -267,8 +281,11 @@ export const finalCta = {
   heading: "Know who's making.",
   headingItalic: "Know what to fix.",
   lead: "Join the early access list. Three little questions help me shape it around the way you really work — and early members keep 50% off for life.",
+  leadMobile:
+    "Three little questions help me shape it around the way you really work — and early members keep 50% off for life.",
   signature: "— [Your name], crochet designer, who got tired of spreadsheets",
   annotation: "takes 30 seconds, promise",
+  annotationMobile: "takes 30 seconds, promise ↓",
 };
 
 export const signupForm = {
@@ -284,10 +301,11 @@ export const signupForm = {
       id: "currentTool" as const,
       legend: "How do you organise them today?",
       options: ["Google Forms", "Ravelry", "Yarnpond", "Instagram DMs", "Something else"],
+      multi: true,
     },
     {
       id: "wouldPay" as const,
-      legend: "Would $7 a month feel fair for this?",
+      legend: "Would $3 a month feel fair for this?",
       options: ["Yes", "Maybe", "Not really"],
     },
   ],
@@ -303,6 +321,14 @@ export const signupForm = {
 export const footer = {
   tagline: "Pattern testing, made gentle — for independent knit and crochet designers.",
   copyright: "© 2026 Testloop",
+  linksMobile: [
+    { label: "How it helps", href: "#features" },
+    { label: "Pricing", href: "#pricing" },
+    { label: "Questions", href: "#faq" },
+    { label: "Instagram", href: "#top" },
+    { label: "Privacy", href: "#top" },
+    { label: "Terms", href: "#top" },
+  ],
   columns: [
     {
       title: "Product",

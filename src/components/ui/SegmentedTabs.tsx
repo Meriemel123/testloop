@@ -40,7 +40,7 @@ export function SegmentedTabs({
     <div
       role="tablist"
       aria-label="Product tour"
-      className={`no-scrollbar flex max-w-full gap-1 overflow-x-auto rounded-full bg-[#EFE8DC] p-[5px] ${className}`}
+      className={`no-scrollbar flex min-w-0 max-w-full gap-1 overflow-x-auto rounded-full bg-[#EFE8DC] p-[5px] ${className}`}
     >
       {tabs.map((tab, index) => {
         const selected = tab.id === activeId;

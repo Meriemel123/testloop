@@ -4,7 +4,7 @@ export function Features() {
   return (
     <section
       id="features"
-      className="border-t border-b border-lines bg-[#FBF8F2] py-16 sm:py-20 lg:py-[120px]"
+      className="border-t border-b border-lines bg-[#FBF8F2] py-[72px] lg:py-[120px]"
     >
       <div className="mx-auto flex max-w-[1440px] flex-col gap-10 px-5 sm:px-8 lg:gap-14 lg:px-[120px]">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between sm:gap-16">
@@ -20,7 +20,35 @@ export function Features() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Mobile: horizontal cards, single column */}
+        <div className="flex flex-col gap-2.5 sm:hidden">
+          {features.items.map((item) => (
+            <div
+              key={item.number}
+              className="flex gap-3.5 rounded-[20px] p-5"
+              style={{ background: item.bg }}
+            >
+              <span
+                className="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-[10px] bg-[#FBF8F2] text-[12px] font-semibold"
+                style={{ color: item.ink }}
+              >
+                {item.number}
+              </span>
+              <div className="flex flex-col gap-1.5">
+                <h3
+                  className="text-[17px] font-semibold tracking-[-0.01em]"
+                  style={{ color: item.ink }}
+                >
+                  {item.title}
+                </h3>
+                <p className="text-[14px] leading-[1.55] text-[#4F493F]">{item.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Tablet/desktop: vertical cards, grid */}
+        <div className="hidden gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-3">
           {features.items.map((item) => (
             <div
               key={item.number}

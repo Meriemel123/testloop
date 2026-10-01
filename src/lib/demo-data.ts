@@ -203,6 +203,7 @@ export const errata: Errata[] = [
 export const makerQuotes = [
   {
     quote: "Loved the construction. Row 42 confused me, but the fix arrived the same day.",
+    quoteMobile: "Row 42 confused me, but the fix arrived the same day.",
     author: "Léa · size L",
     bg: "#F0DCDA",
   },
