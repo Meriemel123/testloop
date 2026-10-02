@@ -217,15 +217,16 @@ export const makerQuotes = [
 export type GalleryPhoto = {
   id: string;
   color: KnitColor;
+  photo?: string;
   name: string;
   meta: string;
 };
 
 export const galleryPhotos: GalleryPhoto[] = [
-  { id: "g1", color: "sage", name: "Jo", meta: "Size S · sage" },
-  { id: "g2", color: "clay", name: "Léa", meta: "Size L · clay" },
-  { id: "g3", color: "ochre", name: "Nora", meta: "Size 2XL · ochre" },
-  { id: "g4", color: "rose", name: "Aïcha", meta: "Size M · rose" },
+  { id: "g1", color: "sage", photo: "/gallery/sage.jpg", name: "Jo", meta: "Size S · sage" },
+  { id: "g2", color: "clay", photo: "/gallery/terracotta.jpg", name: "Léa", meta: "Size L · clay" },
+  { id: "g3", color: "ochre", photo: "/gallery/ochre.jpg", name: "Nora", meta: "Size 2XL · ochre" },
+  { id: "g4", color: "rose", photo: "/gallery/rose.jpg", name: "Aïcha", meta: "Size M · rose" },
   { id: "g5", color: "rust", name: "Sam", meta: "Size XL · rust" },
 ];
 export const galleryInitiallySelected = new Set(["g1", "g3"]);

@@ -28,7 +28,7 @@ export function Gallery() {
         {gallery.tiles.map((tile, i) => (
           <figure key={i} className="w-[240px] shrink-0 snap-start sm:w-auto">
             <span className="relative block aspect-[240/300] overflow-hidden rounded-[20px] sm:aspect-[280/340] sm:rounded-[22px]">
-              <KnitTexture color={tile.color} />
+              <KnitTexture color={tile.color} photo={tile.photo} alt={`${tile.title} — ${tile.caption}`} />
             </span>
             <figcaption className="mt-2.5 flex flex-col gap-0.5 sm:mt-3">
               <span className="text-[15px] font-medium text-ink lg:text-[16px]">{tile.title}</span>
