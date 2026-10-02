@@ -42,7 +42,7 @@ export function GalleryScreen() {
               className="flex flex-col gap-1.5 text-left sm:gap-2"
             >
               <span className="relative block aspect-[150/118] overflow-hidden rounded-xl sm:aspect-[150/220]">
-                <KnitTexture color={photo.color} />
+                <KnitTexture color={photo.color} photo={photo.photo} alt={`${photo.name} — ${photo.meta}`} />
                 {selected ? (
                   <span
                     className="absolute top-2 right-2 flex h-6 w-6 items-center justify-center rounded-full bg-sage"

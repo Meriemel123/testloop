@@ -1,4 +1,5 @@
 import { useId } from "react";
+import Image from "next/image";
 
 const PALETTE: Record<string, { base: string; stitch: string }> = {
   sage: { base: "#567C58", stitch: "#6B9168" },
@@ -12,14 +13,31 @@ export function KnitTexture({
   color = "sage",
   className,
   radius = 0,
+  photo,
+  alt = "",
 }: {
   color?: keyof typeof PALETTE;
   className?: string;
   radius?: number;
+  /** Optional real photo (e.g. a finished piece) to replace the abstract stitch texture. */
+  photo?: string;
+  alt?: string;
 }) {
   const id = useId();
   const patternId = `knit-${color}-${id}`;
   const { base, stitch } = PALETTE[color] ?? PALETTE.sage;
+
+  if (photo) {
+    return (
+      <Image
+        src={photo}
+        alt={alt}
+        fill
+        sizes="(min-width: 1024px) 25vw, 50vw"
+        className={`object-cover ${className ?? ""}`}
+      />
+    );
+  }
 
   return (
     <svg

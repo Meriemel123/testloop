@@ -162,10 +162,10 @@ export const gallery = {
   leadMobile: "Your makers' finished pieces gather in one gallery, ready for your launch post.",
   mobileHint: "swipe to see more →",
   tiles: [
-    { color: "clay" as const, title: "Harbour Cardigan", caption: "Made by Léa · terracotta, size L" },
-    { color: "sage" as const, title: "Harbour Cardigan", caption: "Made by Jo · sage, size S" },
-    { color: "ochre" as const, title: "Harbour Cardigan", caption: "Made by Nora · ochre, size 2XL" },
-    { color: "rose" as const, title: "Harbour Cardigan", caption: "Made by Aïcha · dusty rose, size M" },
+    { color: "clay" as const, photo: "/gallery/terracotta.jpg", title: "Harbour Cardigan", caption: "Made by Léa · terracotta, size L" },
+    { color: "sage" as const, photo: "/gallery/sage.jpg", title: "Harbour Cardigan", caption: "Made by Jo · sage, size S" },
+    { color: "ochre" as const, photo: "/gallery/ochre.jpg", title: "Harbour Cardigan", caption: "Made by Nora · ochre, size 2XL" },
+    { color: "rose" as const, photo: "/gallery/rose.jpg", title: "Harbour Cardigan", caption: "Made by Aïcha · dusty rose, size M" },
   ],
 };
 
